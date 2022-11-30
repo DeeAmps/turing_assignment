@@ -22,32 +22,11 @@ class Node:
         self.parent = parent
 
 
-def parse_attributes(attributes: str) -> Dict[str, str]:
-    attributeMap: Dict[str, str] = {}
-    i = 0
-    while i < len(attributes):
-        j = i + 1
-        while attributes[j] != "=":
-            j += 1
-        key: str = attributes[i:j]
-        i = j + 2
-        j = i + 1
-        while attributes[j] != "\"" and attributes[j] != " ":
-            j += 1
-        value: str = attributes[i:j]
-        attributeMap[key] = value
-        i = j + 1
-
-    return attributeMap
-
-
 def parse_html(html: str) -> Node:
 
-    # base case
     if html[0] != "<":
         return Node(None, html, [], {}, None)
 
-    # recursive case
     i = 1
     while html[i] != " " and html[i] != ">":
         i += 1
